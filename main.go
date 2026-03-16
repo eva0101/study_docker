@@ -1,22 +1,17 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"study/feature_postgres/simple_connection"
+	"study/http_server"
 )
 
 func main() {
-	ctx := context.Background()
+	fmt.Println("Запуск HTTP сервера!")
 
-	conn, err := simple_connection.CreateConnection(ctx)
+	err := http_server.StartHTTPServer()
 	if err != nil {
-		panic(err)
+		fmt.Println("Во время работы сервера произошла ошибка:", err)
+	} else {
+		fmt.Println("Сервер завершился успешно!")
 	}
-
-	if err = conn.Ping(ctx); err != nil {
-		panic(err)
-	}
-
-	fmt.Println("succeed!")
 }
